@@ -30,3 +30,7 @@ Then /^(?:|I )should (not )?see the following movies/ do |notsee, movies_table|
     step "I should #{notsee}see \"#{movie[:title]}\""
   end
 end
+
+Then /^(?:|I )should see all of the movies/ do
+  flunk "Unimplemented"
+end
