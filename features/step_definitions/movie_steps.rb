@@ -4,6 +4,7 @@ Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     Movie.create(movie)
   end
+  $movies_total = movies_table.hashes.length
 end
 
 # Make sure that one string (regexp) occurs before or after another one
@@ -32,5 +33,11 @@ Then /^(?:|I )should (not )?see the following movies/ do |notsee, movies_table|
 end
 
 Then /^(?:|I )should see all of the movies/ do
-  flunk "Unimplemented"
+  rows = -1
+  offset = 0
+  while offset = page.source.index("<tr>", offset) do
+    offset += "<tr>".length
+    rows += 1
+  end
+  assert rows.should == $movies_total
 end
